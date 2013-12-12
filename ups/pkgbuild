@@ -1,0 +1,39 @@
+#!/bin/bash
+
+. "$EUPS_DIR/lib/eupspkg/functions"
+
+REPOSITORY="git://git.lsstcorp.org/personal/mjuric/eupspkg/external/$PRODUCT.git"
+
+setup_bjam_toolset()
+{
+	detect_compiler
+
+	# warn about non-clang builds on Macs
+	if [[ "$(uname)" == "Darwin" && "$COMPILER_TYPE" != clang ]]; then
+		warn "boost needs clang on OS X (you're compiling it with $COMPILER_TYPE. hope you know what you're doing."
+	fi
+
+	if [[ "$COMPILER_TYPE" == clang ]]; then
+		toolset="toolset=clang"
+	fi
+}
+
+build()
+{
+	setup_bjam_toolset
+
+	./bootstrap.sh --without-libraries=mpi --prefix="$PREFIX"
+	./b2 --without-mpi -j $NJOBS $toolset
+}
+
+install()
+{
+	setup_bjam_toolset
+
+	clean_old_install
+	./b2 --without-mpi -j $NJOBS $toolset install
+
+	install_ups
+}
+
+"$@"
