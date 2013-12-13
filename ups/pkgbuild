@@ -4,7 +4,7 @@
 
 REPOSITORY="git://git.lsstcorp.org/personal/mjuric/eupspkg/external/$PRODUCT.git"
 
-setup_bjam_toolset()
+config()
 {
 	detect_compiler
 
@@ -14,30 +14,22 @@ setup_bjam_toolset()
 	fi
 
 	if [[ "$COMPILER_TYPE" == clang ]]; then
-		toolset="toolset=clang"
+		WITH_TOOLSET="--with-toolset clang"
 	fi
-}
 
-config()
-{
-	setup_bjam_toolset
-
-	./bootstrap.sh --without-libraries=mpi --prefix="$PREFIX" $toolset
+	./bootstrap.sh --without-libraries=mpi --prefix="$PREFIX" $WITH_TOOLSET
 }
 
 build()
 {
-	setup_bjam_toolset
-
-	./b2 --without-mpi -j $NJOBS $toolset
+	./b2 -j $NJOBS
 }
 
 install()
 {
-	setup_bjam_toolset
-
 	clean_old_install
-	./b2 --without-mpi -j $NJOBS $toolset install
+
+	./b2 -j $NJOBS install
 
 	install_ups
 }
