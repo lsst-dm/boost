@@ -18,11 +18,17 @@ setup_bjam_toolset()
 	fi
 }
 
+config()
+{
+	setup_bjam_toolset
+
+	./bootstrap.sh --without-libraries=mpi --prefix="$PREFIX" $toolset
+}
+
 build()
 {
 	setup_bjam_toolset
 
-	./bootstrap.sh --without-libraries=mpi --prefix="$PREFIX"
 	./b2 --without-mpi -j $NJOBS $toolset
 }
 
