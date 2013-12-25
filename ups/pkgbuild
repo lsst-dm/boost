@@ -14,7 +14,7 @@ config()
 	fi
 
 	if [[ "$COMPILER_TYPE" == clang ]]; then
-		WITH_TOOLSET="--with-toolset clang"
+		WITH_TOOLSET="--with-toolset=clang"
 	fi
 
 	./bootstrap.sh --without-libraries=mpi --prefix="$PREFIX" $WITH_TOOLSET
