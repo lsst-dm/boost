@@ -1,8 +1,6 @@
 #!/bin/bash
 
-. "$EUPS_DIR/lib/eupspkg/functions"
-
-REPOSITORY="git://git.lsstcorp.org/personal/mjuric/eupspkg/external/$PRODUCT.git"
+. "$EUPS_DIR/lib/eupspkg.sh"
 
 config()
 {
