@@ -1,6 +1,4 @@
-#!/bin/bash
-
-. "$EUPS_DIR/lib/eupspkg.sh"
+# EupsPkg config file. Sourced by 'eupspkg'
 
 config()
 {
@@ -31,5 +29,3 @@ install()
 
 	install_ups
 }
-
-"$@"
