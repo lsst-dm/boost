@@ -1,8 +1,5 @@
 # EupsPkg config file. Sourced by 'eupspkg'
 
-# Because boost is tarballed as './boost_X_Y_Z/...', instead of 'boost_X_Y_Z'
-TAP_TAR_OPTIONS="--strip-components 2"
-
 config()
 {
 	detect_compiler
