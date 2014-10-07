@@ -18,7 +18,7 @@ config()
 
 build()
 {
-	./b2 -j $NJOBS
+	./b2 -j $NJOBS cxxflags="-std=c++11"
 }
 
 install()
