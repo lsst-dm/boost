@@ -18,16 +18,10 @@ config()
 
 build()
 {
-	set +e
-	c++ -o ups/test_cpp11.o -std=c++11 ups/trivial.cc 2>/dev/null
-	if (( $? == 0 )); then
-		cxxflags="-std=c++11"
-	else
-		cxxflags="-std=c++0x"
-	fi
-	echo "Building boost with cxxflags=$cxxflags"
+	detect_compiler
+	echo "Building boost with cxxflags=$CXX_CXX11_FLAG"
 
-	./b2 -j $NJOBS cxxflags=$cxxflags
+	./b2 -j $NJOBS cxxflags=$CXX_CXX11_FLAG
 }
 
 install()
