@@ -18,18 +18,10 @@ config()
 
 build()
 {
-	cxxflags=-std=c++11
-
 	detect_compiler
-	if [[ "$COMPILER_TYPE" == gcc ]]; then
-		CXX1=${CXX:-c++}
-		IFS='.' read -a gccversion <<< "$($CXX1 -dumpversion)"
-		if [[ ${gccversion[0]} -lt 4 || ${gccversion[1]} -lt 7 ]]; then
-			cxxflags=-std=c++0x
-		fi
-	fi
+	echo "Building boost with cxxflags=$CXX_CXX11_FLAG"
 
-	./b2 -j $NJOBS cxxflags=$cxxflags
+	./b2 -j $NJOBS cxxflags=$CXX_CXX11_FLAG
 }
 
 install()
