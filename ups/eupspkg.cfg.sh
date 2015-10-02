@@ -13,7 +13,8 @@ config()
 		WITH_TOOLSET="--with-toolset=clang"
 	fi
 
-	./bootstrap.sh --without-libraries=mpi --prefix="$PREFIX" $WITH_TOOLSET
+        # Disable unicode regex support to make the binary more portable
+	./bootstrap.sh --without-libraries=mpi --without-icu --prefix="$PREFIX" $WITH_TOOLSET
 }
 
 build()
